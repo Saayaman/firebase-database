@@ -6,6 +6,7 @@ import { database } from './firebase';
 class App extends React.Component {
 
   state = {
+    schedule: [],
     name: '',
     position: '',
     email: '',
@@ -70,16 +71,23 @@ class App extends React.Component {
   componentDidMount() {
     database.ref('companies').child('-LqgNHqFg7rWSC0zWwXJ').child('employees').child('-LqgQDpmfWbT5TGmFpZD').child('schedule').child('january2019').once('value').then((snapshot) => {
 
+      let array = []
       snapshot.forEach(eachSchedule => {
         var childKey = eachSchedule.key;
         var childData = eachSchedule.val();
         console.log('key, value', {id: childKey, schedule: childData})
+        array.push(childData)
       });
+
+      this.setState({
+        schedule: array
+      })
       // var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
     }).catch(err => console.log('error!', err));
   }
 
   render() {
+    console.log('schedule state', this.state.schedule);
     return (
       <div className="App">
         <header className="App-header">
