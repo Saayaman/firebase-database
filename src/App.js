@@ -44,11 +44,12 @@ class App extends React.Component {
   submitSchedule = async () => {
     const { title, startingTime, endingTime } = this.state;
 
+    //Get these datees from selecting 
     const startingTimeDate = await new Date("October 10 2019 16:30").toLocaleString();
     const endingTimeDate = await new Date("October 10 2019 18:00").toLocaleString();
 
     console.log('startingtime', startingTimeDate);
-    database.ref('companies').child('-LqgNHqFg7rWSC0zWwXJ').child('employees').child('-LqgQDpmfWbT5TGmFpZD').child('schedule').push(
+    database.ref('companies').child('-LqgNHqFg7rWSC0zWwXJ').child('employees').child('-LqgQDpmfWbT5TGmFpZD').child('schedule/february2019/1').push(
       //1st parmeter
       {
         title,
